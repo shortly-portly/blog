@@ -20,12 +20,13 @@ Route::get('/', function () {
 Route::get('/posts/{post}', function ($slug) {
     $path = __DIR__ . "/../resources/posts/{$slug}.html";
 
+    // Redirect to home page if the given path doesn't exist.
     if (!file_exists($path)) {
-        ddd('File does not exist');
+        return redirect('/');
     }
 
     $post = file_get_contents(__DIR__ . "/../resources/posts/{$slug}.html");
 
     return view('post', [
         'post' => $post]);
-});
+})->where('post', '[A-z_\-]+');
