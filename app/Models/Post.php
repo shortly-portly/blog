@@ -23,7 +23,11 @@ class Post
 
     public static function all()
     {
-        return collect(File::files(resource_path('posts')))
+        // The below is great for performance but you'll never be able to add a new
+        // post unless you do a cache()->forget('posts.all)
+
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path('posts')))
             ->map(fn ($file) => YamlFrontMatter::parseFile($file))
             ->map(fn ($document) => new Post(
                 $document->title,
@@ -31,7 +35,9 @@ class Post
                 $document->excerpt,
                 $document->date,
                 $document->body()
-            ));
+            ))
+            ->sortByDesc('date');
+        });
     }
 
     public static function find($slug)
