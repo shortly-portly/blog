@@ -12,6 +12,3 @@
     </article>
     @endforeach
 </x-layout>
-
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti est facilis corporis reiciendis, eligendi mollitia ipsam quo ullam sint facere non, tempora quis ad. Nobis omnis iure voluptates magni recusandae.
