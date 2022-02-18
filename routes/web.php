@@ -20,8 +20,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/posts/{post}', function ($id) {
+// Use Route Model Binding to automatically find the post.
+Route::get('/posts/{post}', function (Post $post) {
     return view('post', [
-        'post' => Post::findOrFail($id)
+        'post' => $post
     ]);
 });
