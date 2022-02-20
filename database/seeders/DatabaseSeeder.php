@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $user = User::factory()->create([
-            'name' => 'Dave Simmons'
         ]);
 
         Post::factory(10)->create([
