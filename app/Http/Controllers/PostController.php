@@ -1,25 +1,25 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Category;
+use App\Models\Post;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->filter(request(['search', 'category']))->get();
+        $posts = Post::latest()->filter(request(['search', 'category', 'author']))->get();
 
         return view('posts.index', [
-            'posts' => $posts,
-            'currentCategory' => Category::firstWhere('slug', request('category'))
+            'posts'           => $posts,
+            'currentCategory' => Category::firstWhere('slug', request('category')),
         ]);
     }
 
     public function show(Post $post)
     {
         return view('posts.show', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 }
